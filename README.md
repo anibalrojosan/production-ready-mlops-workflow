@@ -6,21 +6,18 @@
 
 **An industrialized ML pipeline** that transforms a ML model into a scalable, tested, and containerized microservice.
 
----
-
 ## 📑 Table of Contents
-- [⚡ Quick Start](#⚡-quick-start-30-seconds)
-- [🎯 Project Purpose](#🎯-project-purpose)
-- [📁 Project Structure](#📁-project-structure)
-- [🛠️ Technical Documentation](#🛠️-technical-documentation)
+- [⚡ Quick Start](#quick-start-30-seconds)
+- [🎯 Project Purpose](#project-purpose)
+- [📁 Project Structure](#project-structure)
+- [🛠️ Technical Documentation](#technical-documentation)
     - [Setup](#setup)
     - [Running Tests](#running-tests)
     - [Training & Execution](#training-the-model)
-- [🔄 CI/CD & Quality Control](#🔄-cicd--quality-control)
-- [🚀 Future & Tech Stack](#🚀-future--tech-stack)
+- [🔄 CI/CD & Quality Control](#cicd--quality-control)
+- [🚀 Future & Tech Stack](#future--tech-stack)
 
----
-## ⚡ Quick Start (30 seconds)
+## Quick Start (30 seconds)
 
 If you have Docker installed, you can spin up the entire ecosystem with a single command:
 
@@ -31,7 +28,7 @@ docker compose -f config/docker-compose.yml up --build
 *   **API:** `http://localhost:5000`
 *   **UI:** `http://localhost:8501`
 
-## 🎯 Project Purpose
+## Project Purpose
 
 This project demonstrates **production-ready MLOps practices** rather than focusing solely on achieving state-of-the-art model performance. The Wisconsin Breast Cancer dataset is used as a **proof-of-concept** to validate the MLOps infrastructure.
 
@@ -49,7 +46,7 @@ The goal is to showcase best practices in:
 
 This project solves this through container immutability and environment parity.
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 production-ready-mlops-workflow/
@@ -67,7 +64,7 @@ production-ready-mlops-workflow/
 └── pyproject.toml             # 📦 Dependency management (uv)
 ```
 
-## 🛠️ Technical Documentation
+## Technical Documentation
 
 ### Setup
 
@@ -225,7 +222,7 @@ This will:
 docker compose -f config/docker-compose.yml down
 ```
 
-## 🔄 CI/CD & Quality Control
+## CI/CD & Quality Control
 
 The project implements a continuous integration pipeline that acts as a quality filter (**Quality Gates**):
 
@@ -254,7 +251,7 @@ The workflow defined in `.github/workflows/main.yml` includes:
 
 This ensures that only tested and validated code reaches production.
 
-## 🚀 Future & Tech Stack
+## Future & Tech Stack
 
 <details>
 <summary><b>🔮 Future Improvements</b></summary>
@@ -270,17 +267,16 @@ Potential enhancements to further strengthen the MLOps workflow:
 <details>
 <summary><b>📚 Technologies Used</b></summary>
 
-- **ML Framework**: scikit-learn
-- **API Framework**: Flask
-- **UI Framework**: Streamlit
-- **Validation**: Pydantic
-- **Testing**: pytest, pytest-mock
-- **Containerization**: Docker, Docker Compose
-- **CI/CD**: GitHub Actions
-- **Code Quality**: ruff, mypy
-- **Dependency Management**: uv
+- **ML Stack:** `scikit-learn` (Pipeline & Models), `pandas`, `joblib`.
+- **Backend & UI:** `Flask` (Inference API), `Streamlit` (Interactive Dashboard).
+- **Modern Tooling:** `uv` (Package Manager), `ruff` (Linter), `mypy` (Type Checking), `pydantic` (Validation).
+- **Testing:** `pytest`, `pytest-mock`, `pytest-cov`.
+- **Infrastructure:** `Docker`, `Docker Compose`, `GitHub Actions`.
+
 </details>
 
----
 
-**Remember**: The value of this project is in the **engineering practices**, not the model metrics. These practices ensure your ML models work reliably in production, regardless of the problem domain or dataset complexity.
+
+> This project was developed with ❤️ by [Anibal Rojo](https://github.com/anibalrojosan) as a proof of concept for a real-world MLOps pipeline.
+
+> **Remember**: The value of this project is in the **engineering practices**, not the model metrics. These practices ensure your ML models work reliably in production, regardless of the problem domain or dataset complexity.
