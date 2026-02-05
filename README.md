@@ -1,10 +1,41 @@
-# MLOps Infrastructure Demo
+# Production-Ready MLOps Workflow 🚀
 
-A production-ready MLOps workflow demonstrating best practices in machine learning operations, from model training to deployment. This project showcases how to build a maintainable, scalable, and reproducible ML system.
+[![CI/CD Pipeline](https://github.com/anibalrojosan/mlops-infrastructure-demo/actions/workflows/main.yml/badge.svg)](https://github.com/anibalrojosan/mlops-infrastructure-demo/actions/workflows/main.yml)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
+[![Coverage](https://img.shields.io/badge/coverage-80%2B%25-green.svg)](#running-tests)
+
+**An industrialized ML pipeline** that transforms a ML model into a scalable, tested, and containerized microservice.
+
+---
+
+## 📑 Table of Contents
+- [⚡ Quick Start](#⚡-quick-start-30-seconds)
+- [🎯 Project Purpose](#🎯-project-purpose)
+- [📁 Project Structure](#📁-project-structure)
+- [🛠️ Technical Documentation](#🛠️-technical-documentation)
+    - [Setup](#setup)
+    - [Running Tests](#running-tests)
+    - [Training & Execution](#training-the-model)
+- [🔄 CI/CD & Quality Control](#🔄-cicd--quality-control)
+- [🚀 Future & Tech Stack](#🚀-future--tech-stack)
+
+---
+## ⚡ Quick Start (30 seconds)
+
+If you have Docker installed, you can spin up the entire ecosystem with a single command:
+
+```bash
+docker compose -f config/docker-compose.yml up --build
+```
+
+*   **API:** `http://localhost:5000`
+*   **UI:** `http://localhost:8501`
 
 ## 🎯 Project Purpose
 
-This project demonstrates **production-ready MLOps practices** rather than focusing solely on achieving state-of-the-art model performance. The goal is to showcase best practices in:
+This project demonstrates **production-ready MLOps practices** rather than focusing solely on achieving state-of-the-art model performance. The Wisconsin Breast Cancer dataset is used as a **proof-of-concept** to validate the MLOps infrastructure.
+
+The goal is to showcase best practices in:
 
 - **Reproducible ML Pipelines**: Using scikit-learn pipelines for consistent preprocessing and inference
 - **API Design**: Building robust REST APIs with proper validation and error handling
@@ -12,95 +43,35 @@ This project demonstrates **production-ready MLOps practices** rather than focus
 - **CI/CD**: Automated quality gates, testing, and deployment pipelines
 - **Code Quality**: Type checking, linting, and comprehensive testing
 
-## 🔍 Why This Dataset?
+**The real question this project answers**:
 
-The Wisconsin Breast Cancer dataset is used as a **proof-of-concept** to validate the MLOps infrastructure. This choice allows the project to focus on engineering practices rather than model complexity.
+>  *"How do I ensure my ML model works the same way in production as it does in development?"*
 
-**Why not a more complex dataset?**
-1. **Infrastructure First**: The same MLOps practices work for simple or complex models. The value is in the engineering, not the accuracy metric.
-2. **Reproducibility**: A well-understood dataset ensures the infrastructure can be validated correctly before applying to more complex problems.
-3. **Learning Focus**: This project started as a learning exercise to understand MLOps principles—using a simple dataset allows focus on infrastructure, not feature engineering.
-4. **Transferability**: The practices demonstrated here are immediately applicable to any ML project, regardless of dataset complexity.
-
-**The real question this project answers**: *"How do I ensure my ML model works the same way in production as it does in development?"*
-
-## 🔧 What This Project Demonstrates
-
-### 1. Modular & Testable ML Code
-- **Separation of Concerns**: Clear boundaries between data ingestion, preprocessing, training, and inference
-- **Unit Tests**: Comprehensive test coverage for each component (80%+ coverage requirement)
-- **Integration Tests**: End-to-end testing of the full pipeline and API
-
-### 2. Production-Ready API
-- **Input Validation**: Pydantic schemas for strict type checking and validation
-- **Error Handling**: Proper HTTP status codes and meaningful error messages
-- **Logging**: Structured logging for debugging and monitoring
-- **Health Checks**: Monitoring endpoints for service status
-
-### 3. DevOps Best Practices
-- **Docker Containerization**: Multi-stage builds for optimized image sizes
-- **Docker Compose**: Orchestration of multi-service architecture
-- **CI/CD Pipelines**: Automated testing, building, and deployment
-- **Quality Gates**: Linting, type checking, and test coverage requirements before deployment
-
-### 4. Reproducibility & Versioning
-- **Locked Dependencies**: `uv.lock` ensures consistent environments
-- **Versioned Pipelines**: Model artifacts tracked and reproducible
-- **Documentation**: Clear setup and deployment instructions
-
-## 🚀 Key Features
-
-- ✅ **Type-Safe API**: Pydantic validation prevents production errors
-- ✅ **Comprehensive Testing**: Unit and integration tests with 80%+ coverage
-- ✅ **Automated CI/CD**: Quality gates ensure code quality before deployment
-- ✅ **Multi-Container Setup**: Docker Compose for easy local development and deployment
-- ✅ **Modern Python**: Type hints, dependency management with `uv`
-- ✅ **Production-Ready**: Proper error handling, logging, and monitoring
+This project solves this through container immutability and environment parity.
 
 ## 📁 Project Structure
 
-```
-mlops-infrastructure-demo/
-├── config/                    # Configuration files
-│   ├── docker-compose.yml     # Multi-container Docker application
-│   ├── Dockerfile.api         # Flask API container
-│   └── Dockerfile.streamlit   # Streamlit UI container
-├── data/                      # Dataset storage
-│   └── data.csv
-├── models/                    # Trained model artifacts
-│   └── model.joblib
-├── notebooks/                 # Exploratory analysis and experimentation
-│   ├── 1.0-eda.ipynb
-│   ├── 2.0-data_preprocessing.ipynb
-│   ├── 3.0-feature_engineering.ipynb
-│   └── 4.0-model_experimentation.ipynb
-├── reports/                   # Generated reports and visualizations
-│   ├── figures/
-│   └── metrics/
-├── src/                       # Source code
-│   ├── app.py                 # Flask API for model inference
-│   ├── schemas.py             # Pydantic schemas for API validation
-│   ├── model/                 # ML pipeline components
-│   │   ├── data_ingestion.py
-│   │   ├── data_preprocessing.py
-│   │   ├── model_inference.py
-│   │   ├── model_training.py
-│   │   └── pipeline_utils.py
-│   └── streamlit_app.py       # Streamlit UI for predictions
-├── tests/                     # Test suite
-│   ├── unit/                  # Unit tests for each component
-│   ├── integration/           # Integration tests
-│   └── fixtures/              # Test data
-├── .github/workflows/         # CI/CD workflows
-│   └── main.yml
-├── pyproject.toml             # Project dependencies (managed by uv)
-├── requirements.txt           # Generated requirements for pip
-└── uv.lock                    # Locked dependency versions
+```text
+production-ready-mlops-workflow/
+├── .github/workflows/         # 🔄 CI/CD: Quality gates & automated deployment
+├── config/                    # 🐳 Docker: Multi-container orchestration
+├── data/                      # 📊 Dataset storage (raw & processed)
+├── models/                    # 🧠 Trained model artifacts (joblib)
+├── notebooks/                 # 📓 EDA and experimentation
+├── reports/                   # 📈 Generated metrics and figures
+├── src/                       # 🛠️ Source code
+│   ├── app.py                 # 🌐 Inference API (Flask)
+│   ├── schemas.py             # ✅ Data validation (Pydantic)
+│   └── model/                 # 🚂 Training and inference logic
+├── tests/                     # 🧪 Unit & Integration test suite
+└── pyproject.toml             # 📦 Dependency management (uv)
 ```
 
-## 🛠️ Setup
+## 🛠️ Technical Documentation
 
-### Prerequisites
+### Setup
+
+#### Prerequisites
 - Python 3.12+
 - Docker and Docker Compose (for containerized deployment)
 - `uv` (recommended) or `pip` for dependency management
@@ -111,8 +82,8 @@ mlops-infrastructure-demo/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/anibalrojosan/mlops-infrastructure-demo
-   cd mlops-infrastructure-demo
+   git clone https://github.com/anibalrojosan/production-ready-mlops-workflow
+   cd production-ready-mlops-workflow
    ```
 
 2. **Install `uv` globally (if needed):**
@@ -135,8 +106,8 @@ mlops-infrastructure-demo/
 
    Note: you can run commands using `uv run` if you don't want to activate the virtual env.
 
-### Using `pip` (Alternative)
-
+<details>
+<summary><b>Using pip (Alternative)</b></summary>
 
 1. **Create and activate virtual environment:**
    ```bash
@@ -156,17 +127,18 @@ mlops-infrastructure-demo/
 
    **Option A**: using the **requirements.txt** (recommended for production).
 
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
    **Option B**: using the **pyproject.toml** (recommended for development).
 
-   ```
+   ```bash
    pip install .
    ```
+</details>
 
-## 🧪 Running Tests
+### Running Tests
 
 The project includes comprehensive tests with a coverage requirement of 80%+.
 
@@ -185,7 +157,7 @@ uv run pytest -v
 uv run pytest --cov=src --cov-report=term-missing
 ```
 
-## 🚂 Training the Model
+### Training the Model
 
 Train the ML pipeline and save the model artifact:
 
@@ -201,7 +173,7 @@ This will:
 
 **Note**: The model must be trained before running the API.
 
-## 🌐 Running the API
+### Running the API
 
 Start the Flask API locally:
 
@@ -213,45 +185,15 @@ The API will be accessible at `http://127.0.0.1:5000/`
 
 ### API Endpoints
 
-#### Health Check
-```bash
-GET http://127.0.0.1:5000/
-```
+The API exposes a `POST /predict` endpoint that accepts features as JSON and returns the prediction with probabilities. It also includes a `GET /` health check endpoint to verify service and model status.
 
-**Response:**
-```json
-{
-  "status": "healthy",
-  "model_loaded": true
-}
-```
-
-#### Prediction
-```bash
-POST http://127.0.0.1:5000/predict
-Content-Type: application/json
-
-{
-  "radius_mean": 17.99,
-  "texture_mean": 10.38,
-  ...
-}
-```
-
-**Response:**
-```json
-{
-  "prediction": 1,
-  "probability_benign": 0.1,
-  "probability_malignant": 0.9
-}
-```
+For full validation details and data structures, refer to the Pydantic schemas in [`src/schemas.py`](src/schemas.py).
 
 **Example using test scripts:**
 - **Linux/macOS:** `./tests/integration/bash_test.sh`
 - **Windows PowerShell:** `.\tests\integration\powershell_test.ps1`
 
-## 🎨 Streamlit UI
+### Streamlit UI
 
 The Streamlit application provides an interactive web interface for making predictions:
 
@@ -261,7 +203,7 @@ streamlit run src/streamlit_app.py
 
 Ensure the Flask API is running first. The UI will open at `http://localhost:8501`.
 
-## 🐳 Docker Deployment
+### Docker Deployment
 
 The project uses Docker Compose to orchestrate both the Flask API and Streamlit UI services.
 
@@ -283,9 +225,18 @@ This will:
 docker compose -f config/docker-compose.yml down
 ```
 
-## 🔄 CI/CD Pipeline
+## 🔄 CI/CD & Quality Control
 
-The project includes a comprehensive CI/CD pipeline using GitHub Actions (`.github/workflows/main.yml`):
+The project implements a continuous integration pipeline that acts as a quality filter (**Quality Gates**):
+
+1. **Static Analysis**: `ruff` for linting and `mypy` for strict typing.
+2. **Automated Testing**: `pytest` with a minimum coverage requirement of 80%.
+3. **Container Security**: Multi-stage Docker builds for lightweight and secure images.
+4. **Integration Tests**: Endpoint validation in isolated containers before deployment.
+
+### Pipeline Details (GitHub Actions)
+
+The workflow defined in `.github/workflows/main.yml` includes:
 
 ### Quality Gates Job
 1. **Linting**: `ruff` for code style and quality
@@ -301,41 +252,23 @@ The project includes a comprehensive CI/CD pipeline using GitHub Actions (`.gith
 5. **Health Checks**: Verify API and UI endpoints
 6. **Cleanup**: Remove test containers
 
-This ensures that only tested, validated code reaches production.
+This ensures that only tested and validated code reaches production.
 
-## 💡 Key Learnings & Transferability
+## 🚀 Future & Tech Stack
 
-This project demonstrates practices that are directly transferable to any ML project:
-
-### What You Can Apply to Other Projects
-
-1. **Pipeline Architecture**: The modular pipeline structure works for any ML problem
-2. **API Design Patterns**: Pydantic validation and error handling are universal
-3. **Testing Strategies**: Unit and integration test patterns
-4. **CI/CD Practices**: Quality gates and automated deployment pipelines
-5. **Containerization**: Docker setup that scales from development to production
-
-### Real-World Applications
-
-While this uses a simple dataset, these practices are used by:
-- Teams deploying models to millions of users
-- Companies managing hundreds of models in production
-- Organizations requiring regulatory compliance (healthcare, finance)
-- Startups building ML-first products
-
-**The infrastructure scales regardless of model complexity.**
-
-## 🔮 Future Improvements
+<details>
+<summary><b>🔮 Future Improvements</b></summary>
 
 Potential enhancements to further strengthen the MLOps workflow:
+- **Model Versioning**: Implement MLFlow for experiment tracking and model registry.
+- **Monitoring**: Add model performance monitoring and drift detection.
+- **A/B Testing**: Framework for comparing model versions in production.
+- **Feature Store**: Centralized feature management for multiple models.
+- **Automated Retraining**: Scheduled retraining based on data drift or performance degradation.
+</details>
 
-- **Model Versioning**: Implement MLFlow for experiment tracking and model registry
-- **Monitoring**: Add model performance monitoring and drift detection
-- **A/B Testing**: Framework for comparing model versions in production
-- **Feature Store**: Centralized feature management for multiple models
-- **Automated Retraining**: Scheduled retraining based on data drift or performance degradation
-
-## 📚 Technologies Used
+<details>
+<summary><b>📚 Technologies Used</b></summary>
 
 - **ML Framework**: scikit-learn
 - **API Framework**: Flask
@@ -346,6 +279,7 @@ Potential enhancements to further strengthen the MLOps workflow:
 - **CI/CD**: GitHub Actions
 - **Code Quality**: ruff, mypy
 - **Dependency Management**: uv
+</details>
 
 ---
 
