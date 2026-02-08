@@ -20,3 +20,6 @@ models/
 
 # Environment variables
 .env
+
+# Project files
+github_projects.md
